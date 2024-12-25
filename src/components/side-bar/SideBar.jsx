@@ -15,7 +15,7 @@ function SideBar() {
   }, [currentPageNo]);
 
   return (
-    <div className="w-[30%] h-full pt-5 pb-20 px-5 bg-[#304767] text-white flex flex-col gap-10">
+    <div className="w-[30%] min-h-full pt-5 pb-20 px-5 bg-[#304767] text-white flex flex-col gap-10">
       <p className="text-xl">💰 react money tracker</p>
       <div className="flex flex-col gap-3">
         <p className="text-xl">Step {pageData.pageNo + 1}</p>
