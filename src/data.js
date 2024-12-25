@@ -1,9 +1,8 @@
-const pages = [
+const data = [
   {
-    pageNo: 1,
+    pageNo: 0,
     pageName: "Income",
-    suggestText:
-      "Please enter your income details here, such as your regular earnings and any additional sources of income, to ensure accurate recording and tracking.",
+    suggestText: "Enter your income details, including regular earnings and additional sources, for accurate tracking.",
     details: [
       { id: 1, name: "Salary", type: "month" },
       { id: 2, name: "Extra", type: "month" },
@@ -11,12 +10,12 @@ const pages = [
       { id: 4, name: "Investment", type: "year" },
       { id: 5, name: "Other", type: "month" },
     ],
+    line: true,
   },
   {
-    pageNo: 2,
+    pageNo: 1,
     pageName: "Expense",
-    suggestText:
-      "Please provide your expense details here, including categories like food, accommodation, and other recurring costs, to ensure that your spending is fully documented.",
+    suggestText: "Provide expense details, such as food, accommodation, and other costs, for complete documentation.",
     details: [
       { id: 1, name: "Housing", type: "month" },
       { id: 2, name: "Food", type: "month" },
@@ -25,12 +24,15 @@ const pages = [
       { id: 5, name: "Education", type: "month" },
       { id: 6, name: "Other", type: "month" },
     ],
+    line: true,
   },
   {
-    pageNo: 3,
+    pageNo: 2,
     pageName: "Summary",
-    suggestText:
-      "Here is a summary of your income and expenses for the specified period, helping you understand your overall financial situation with a clear breakdown of your earnings, spending, and balance.",
+    suggestText: "View a summary of your income and expenses with a clear breakdown of earnings, spending, and balance.",
     details: [],
+    line: false,
   },
 ];
+
+export default data;
