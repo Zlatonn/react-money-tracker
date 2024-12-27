@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Step from "./Step";
 import data from "../../data";
 
-import usePageNo from "../../hooks/usePagesNo";
+import usePageNo from "../../hooks/usePageNo";
 
 function SideBar() {
   const currPageNo = usePageNo((state) => state.pageNo);
