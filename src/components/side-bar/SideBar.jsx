@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import usePages from "../../hooks/usePages";
 import Step from "./Step";
 import data from "../../data";
 
+import usePageNo from "../../hooks/usePagesNo";
+
 function SideBar() {
-  const currentPageNo = usePages((state) => state.pageNo);
-  const setPage = usePages((state) => state.setPage);
+  const currPageNo = usePageNo((state) => state.pageNo);
+  const setPage = usePageNo((state) => state.setPage);
 
   const [pageData, setPageData] = useState({});
 
   useEffect(() => {
-    const currentPageData = data.find((page) => page.pageNo === currentPageNo);
-    setPageData(currentPageData || {});
-  }, [currentPageNo]);
+    const currPageData = data.find((page) => page.pageNo === currPageNo);
+    setPageData(currPageData || {});
+  }, [currPageNo]);
 
   return (
     <div className="w-[30%] min-h-full pt-5 pb-20 px-5 bg-[#304767] text-white flex flex-col gap-10">
@@ -28,7 +29,7 @@ function SideBar() {
             pageNo={e.pageNo}
             name={e.pageName}
             line={e.line}
-            state={e.pageNo === currentPageNo ? "active" : e.pageNo < currentPageNo ? "complete" : null}
+            state={e.pageNo === currPageNo ? "active" : e.pageNo < currPageNo ? "complete" : null}
             handle={() => setPage(e.pageNo)}
           />
         ))}
