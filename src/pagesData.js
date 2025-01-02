@@ -1,4 +1,4 @@
-const data = [
+const pagesData = [
   {
     pageNo: 0,
     pageName: "Income",
@@ -35,4 +35,4 @@ const data = [
   },
 ];
 
-export default data;
+export default pagesData;

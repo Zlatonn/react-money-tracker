@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import data from "../../data";
-import usePages from "../../hooks/usePages";
+import pagesData from "../../pagesData";
+import usePageNo from "../../hooks/usePages";
 import Button from "../button/Button";
 import Input from "../input/input";
 
 function Content() {
-  const currentPageNo = usePages((state) => state.pageNo);
-  const prevPage = usePages((state) => state.prevPage);
-  const nextPage = usePages((state) => state.nextPage);
+  // import usepageNo from state management
+  const pageNo = usePageNo((state) => state.pageNo);
+  const prevPage = usePageNo((state) => state.prevPage);
+  const nextPage = usePageNo((state) => state.nextPage);
 
+  // create state for current page data
   const [pageData, setPageData] = useState({});
 
+  // update current page data when pageNo change
   useEffect(() => {
-    const currentPage = data.find((page) => page.pageNo === currentPageNo);
+    const currentPage = pagesData.find((page) => page.pageNo === pageNo);
     setPageData(currentPage || {});
-  }, [currentPageNo]);
+  }, [pageNo]);
 
   return (
     <div className="w-[55%] py-5 px-5 flex flex-col justify-between">
@@ -29,15 +32,15 @@ function Content() {
                 {detail.name}
                 <span className="text-blue-500">{` / ${detail.per}`}</span>
               </p>
-              <Input type={detail.type} value={0} />
+              <Input type={detail.type} />
             </div>
           ))}
         </div>
       </div>
 
       <div className="flex justify-start gap-5 items-center mt-10">
-        <Button name="Prev" handle={currentPageNo > 0 ? prevPage : null} />
-        <Button name="Next" handle={currentPageNo < data.length - 1 ? nextPage : null} />
+        <Button name="Prev" handle={pageNo > 0 ? prevPage : null} />
+        <Button name="Next" handle={pageNo < pagesData.length - 1 ? nextPage : null} />
       </div>
     </div>
   );
