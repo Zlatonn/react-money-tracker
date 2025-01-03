@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import usePageNo from "../../hooks/usePages";
+import usePageNo from "../../hooks/usePageNo";
 import Step from "./Step";
 import pagesData from "../../pagesData";
 
 function SideBar() {
   // import usepageNo from state management
   const pageNo = usePageNo((state) => state.pageNo);
-  const setPageNo = usePageNo((state) => state.setPage);
+  const setPageNo = usePageNo((state) => state.setPageNo);
 
   // create state for current page data
   const [pageData, setPageData] = useState({});
