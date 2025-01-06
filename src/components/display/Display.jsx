@@ -11,6 +11,7 @@ function Display() {
   const getExpenseMonthly = useFinance((state) => state.getExpenseMonthly);
   const getExpenseAnnual = useFinance((state) => state.getExpenseAnnual);
 
+  //create local state
   const [incomMonthly, setIncomeMonthly] = useState(0);
   const [incomeAnnual, setIncomeAnnual] = useState(0);
   const [expenseMonthly, setExpenseMonthly] = useState(0);
@@ -19,12 +20,12 @@ function Display() {
   useEffect(() => {
     setIncomeMonthly(getIncomeMonthly);
     setIncomeAnnual(getIncomeAnnual);
-  }, [income]);
+  }, [income, getIncomeMonthly, getIncomeAnnual]);
 
   useEffect(() => {
     setExpenseMonthly(getExpenseMonthly);
     setExpenseAnnual(getExpenseAnnual);
-  }, [expense]);
+  }, [expense, getExpenseMonthly, getExpenseAnnual]);
 
   const cashFlowMonthly = incomMonthly - expenseMonthly;
   const cashFlowAnnual = incomeAnnual - expenseAnnual;

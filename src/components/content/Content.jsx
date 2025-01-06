@@ -27,6 +27,7 @@ function Content() {
   const expense = useFinance((state) => state.expense);
   const updateExpense = useFinance((state) => state.updateExpense);
 
+  // function handle input
   const handleIncomeInput = (id, value, per) => {
     updateIncome(id, value, per);
   };
