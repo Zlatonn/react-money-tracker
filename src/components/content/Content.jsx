@@ -143,7 +143,7 @@ function Content() {
       <div className="flex justify-start gap-5 items-center mt-10">
         <Button name="Prev" handle={pageNo > 0 ? prevPage : null} />
         <Button name="Next" handle={pageNo < pagesData.length - 1 ? nextPage : null} />
-        <Button name="clear" handle={() => clearData()} />
+        <Button name="clear" handle={clearData} />
       </div>
     </div>
   );
