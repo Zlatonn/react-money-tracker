@@ -1,38 +1,33 @@
+import { useEffect, useState } from "react";
 import useFinance from "../../hooks/useFinance";
 
 function Display() {
+  // import useFinance from statemanagement
   const income = useFinance((state) => state.income);
   const expense = useFinance((state) => state.expense);
 
-  // Calculation monthly
-  const sumIncomMonthly = Object.values(income)
-    .filter((item) => item.per === "month")
-    .map((item) => item.value || 0)
-    .reduce((acc, curr) => acc + curr, 0);
+  const getIncomeMonthly = useFinance((state) => state.getIncomeMonthly);
+  const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
+  const getExpenseMonthly = useFinance((state) => state.getExpenseMonthly);
+  const getExpenseAnnual = useFinance((state) => state.getExpenseAnnual);
 
-  const sumExpenseMonthly = Object.values(expense)
-    .filter((item) => item.per === "month")
-    .map((item) => item.value || 0)
-    .reduce((acc, curr) => acc + curr, 0);
+  const [incomMonthly, setIncomeMonthly] = useState(0);
+  const [incomeAnnual, setIncomeAnnual] = useState(0);
+  const [expenseMonthly, setExpenseMonthly] = useState(0);
+  const [expenseAnnual, setExpenseAnnual] = useState(0);
 
-  const cashFlowMonthly = sumIncomMonthly - sumExpenseMonthly;
+  useEffect(() => {
+    setIncomeMonthly(getIncomeMonthly);
+    setIncomeAnnual(getIncomeAnnual);
+  }, [income]);
 
-  // Calculation Annual
-  const sumIncomAnnual =
-    Object.values(income)
-      .filter((item) => item.per === "year")
-      .map((item) => item.value || 0)
-      .reduce((acc, curr) => acc + curr, 0) +
-    sumIncomMonthly * 12;
+  useEffect(() => {
+    setExpenseMonthly(getExpenseMonthly);
+    setExpenseAnnual(getExpenseAnnual);
+  }, [expense]);
 
-  const sumExpenseAnnual =
-    Object.values(expense)
-      .filter((item) => item.per === "year")
-      .map((item) => item.value || 0)
-      .reduce((acc, curr) => acc + curr, 0) +
-    sumExpenseMonthly * 12;
-
-  const cashFlowAnnual = sumIncomAnnual - sumExpenseAnnual;
+  const cashFlowMonthly = incomMonthly - expenseMonthly;
+  const cashFlowAnnual = incomeAnnual - expenseAnnual;
 
   // function return sign number
   const signStatus = (number) => {
@@ -44,10 +39,10 @@ function Display() {
       <div>
         <p className="underline font-bold">Mothly</p>
         <p>
-          Income: <span className="text-green-500">{sumIncomMonthly.toLocaleString()}</span>
+          Income: <span className="text-green-500">{incomMonthly.toLocaleString()}</span>
         </p>
         <p>
-          Expenese: <span className="text-red-500">{sumExpenseMonthly.toLocaleString()}</span>
+          Expenese: <span className="text-red-500">{expenseMonthly.toLocaleString()}</span>
         </p>
         <p>
           Cashflow:
@@ -60,10 +55,10 @@ function Display() {
       <div>
         <p className="underline font-bold">Annual</p>
         <p>
-          Income: <span className="text-green-500">{sumIncomAnnual.toLocaleString()}</span>
+          Income: <span className="text-green-500">{incomeAnnual.toLocaleString()}</span>
         </p>
         <p>
-          Expenese: <span className="text-red-500">{sumExpenseAnnual.toLocaleString()}</span>
+          Expenese: <span className="text-red-500">{expenseAnnual.toLocaleString()}</span>
         </p>
         <p>
           Cashflow:
