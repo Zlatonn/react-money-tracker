@@ -19,6 +19,8 @@ const useFinance = create(
           expense: { ...state.expense, [id]: { value, per } },
         })),
 
+      clearData: () => set({ income: {}, expense: {} }),
+
       // function calculate store
       getIncomeMonthly: () =>
         Object.values(get().income)

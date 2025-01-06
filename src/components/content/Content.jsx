@@ -26,6 +26,7 @@ function Content() {
   const updateIncome = useFinance((state) => state.updateIncome);
   const expense = useFinance((state) => state.expense);
   const updateExpense = useFinance((state) => state.updateExpense);
+  const clearData = useFinance((state) => state.clearData);
   const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
   const getCashFlowAnnual = useFinance((state) => state.getCashFlowAnnual);
 
@@ -142,6 +143,7 @@ function Content() {
       <div className="flex justify-start gap-5 items-center mt-10">
         <Button name="Prev" handle={pageNo > 0 ? prevPage : null} />
         <Button name="Next" handle={pageNo < pagesData.length - 1 ? nextPage : null} />
+        <Button name="clear" handle={() => clearData()} />
       </div>
     </div>
   );
