@@ -36,38 +36,51 @@ function Display() {
   };
 
   return (
-    <div className="w-[15%] py-20 px-5 flex flex-col gap-5 text-sm">
-      <div>
-        <p className="underline font-bold">Mothly</p>
-        <p>
-          Income: <span className="text-green-500">{incomMonthly.toLocaleString()}</span>
-        </p>
-        <p>
-          Expenese: <span className="text-red-500">{expenseMonthly.toLocaleString()}</span>
-        </p>
-        <p>
-          Cashflow:
-          <span className={`${signStatus(cashFlowMonthly) ? "text-green-500" : "text-red-500"}`}>
-            {signStatus(cashFlowMonthly) && " + "}
-            {cashFlowMonthly.toLocaleString()}
-          </span>
-        </p>
+    <div className="w-[20%] py-20 px-5 flex flex-col gap-5 text-sm">
+      <div className="p-3 rounded-lg bg-blue-100">
+        <p className="font-bold text-lg ">Mothly</p>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <p className="font-light">income</p>
+            <p className="text-green-500">+฿{incomMonthly.toLocaleString()}</p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <p className="font-light">expense</p>
+            <p className="text-red-500">-฿{expenseMonthly.toLocaleString()}</p>
+          </div>
+
+          <div className="flex justify-between items-end font-bold text-[#304767]">
+            <p>total</p>
+            <p>
+              {signStatus(cashFlowAnnual) ? " +฿" : " -฿"}
+              {Math.abs(cashFlowMonthly).toLocaleString()}
+            </p>
+          </div>
+        </div>
       </div>
-      <div>
-        <p className="underline font-bold">Annual</p>
-        <p>
-          Income: <span className="text-green-500">{incomeAnnual.toLocaleString()}</span>
-        </p>
-        <p>
-          Expenese: <span className="text-red-500">{expenseAnnual.toLocaleString()}</span>
-        </p>
-        <p>
-          Cashflow:
-          <span className={`${signStatus(cashFlowAnnual) ? "text-green-500" : "text-red-500"}`}>
-            {signStatus(cashFlowAnnual) && " + "}
-            {cashFlowAnnual.toLocaleString()}
-          </span>
-        </p>
+
+      <div className="p-3  rounded-lg bg-blue-100">
+        <p className="font-bold text-lg">Annual</p>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <p className="font-light">income</p>
+            <p className="text-green-500">+฿{incomeAnnual.toLocaleString()}</p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <p className="font-light">expense</p>
+            <p className="text-red-500">-฿{expenseAnnual.toLocaleString()}</p>
+          </div>
+
+          <div className="flex justify-between items-end font-bold text-[#304767]">
+            <p>total</p>
+            <p>
+              {signStatus(cashFlowAnnual) ? " +฿" : " -฿"}
+              {Math.abs(cashFlowAnnual).toLocaleString()}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

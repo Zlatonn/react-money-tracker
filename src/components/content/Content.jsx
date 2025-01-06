@@ -37,7 +37,7 @@ function Content() {
   };
 
   return (
-    <div className="w-[55%] py-5 px-5 flex flex-col justify-between">
+    <div className="w-[50%] py-5 px-5 flex flex-col justify-between">
       <div className="flex flex-col gap-6">
         <p>😊</p>
         <p className="text-xl font-bold">{pageData.pageName}</p>
