@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useFinance from "../../hooks/useFinance";
 
 function Display() {
-  // import useFinance from statemanagement
+  // import useFinance from state management
   const income = useFinance((state) => state.income);
   const expense = useFinance((state) => state.expense);
   const getIncomeMonthly = useFinance((state) => state.getIncomeMonthly);

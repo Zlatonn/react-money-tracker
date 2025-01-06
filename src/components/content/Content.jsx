@@ -4,6 +4,7 @@ import usePageNo from "../../hooks/usePageNo";
 import Button from "../button/Button";
 import Input from "../input/input";
 import useFinance from "../../hooks/useFinance";
+import Chart from "react-google-charts";
 
 function Content() {
   // import usepageNo from state management
@@ -11,7 +12,7 @@ function Content() {
   const prevPage = usePageNo((state) => state.prevPage);
   const nextPage = usePageNo((state) => state.nextPage);
 
-  // create state for current page data
+  // create local state for current page data
   const [pageData, setPageData] = useState({});
 
   // update current page data when pageNo change
@@ -23,9 +24,10 @@ function Content() {
   // import useFinance from statemanagement
   const income = useFinance((state) => state.income);
   const updateIncome = useFinance((state) => state.updateIncome);
-
   const expense = useFinance((state) => state.expense);
   const updateExpense = useFinance((state) => state.updateExpense);
+  const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
+  const getCashFlowAnnual = useFinance((state) => state.getCashFlowAnnual);
 
   // function handle input
   const handleIncomeInput = (id, value, per) => {
@@ -35,6 +37,63 @@ function Content() {
   const handleExpenseInput = (id, value, per) => {
     updateExpense(id, value, per);
   };
+
+  //create local state for summary page
+  const [incomeAnnual, setIncomeAnnual] = useState(0);
+  const [cashFlowAnnual, setCashFlowAnnual] = useState(0);
+
+  //update income & cash flow per annual
+  useEffect(() => {
+    setIncomeAnnual(getIncomeAnnual);
+  }, [income, getIncomeAnnual]);
+
+  useEffect(() => {
+    setCashFlowAnnual(getCashFlowAnnual);
+  }, [income, expense, getCashFlowAnnual]);
+
+  //population group data
+  const populationGroup = [
+    { name: "Bottom", ratio: 20, text: "This group of the population has an average annual income of less than 100,000 bath" },
+    { name: "Second", ratio: 20, text: "This group of the population has an average annual income of 100,000 - 200,000 baht." },
+    { name: "Middle", ratio: 20, text: "This group of the population has an average annual income of 200,000 - 400,000 baht." },
+    { name: "Fourth", ratio: 20, text: "This group of the population has an average annual income of 400,000 - 800,000 baht." },
+    { name: "Top", ratio: 20, text: "This group of the population has an average annual income of more than 800,000 baht." },
+  ];
+
+  //function find current group
+  const findPopulationGroup = () => {
+    if (incomeAnnual <= 100000) {
+      return "Bottom";
+    } else if (incomeAnnual > 100000 && incomeAnnual <= 200000) {
+      return "Second";
+    } else if (incomeAnnual > 200000 && incomeAnnual <= 400000) {
+      return "Middle";
+    } else if (incomeAnnual > 400000 && incomeAnnual <= 800000) {
+      return "Fourth";
+    } else if (incomeAnnual > 800000) {
+      return "Top";
+    }
+  };
+
+  //create local state for current group
+  const [currPopulationGroup, setCurrPopulationGroup] = useState({});
+
+  // update curr group
+  useEffect(() => {
+    const matchedGroup = populationGroup.find((group) => group.name === findPopulationGroup());
+    setCurrPopulationGroup(matchedGroup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [incomeAnnual]);
+
+  // data fot  create google chart colunm type
+  const populationChart = [
+    ["Element", "population(%)", { role: "style" }],
+    [populationGroup[0].name, populationGroup[0].ratio, currPopulationGroup?.name === populationGroup[0].name ? "" : "#e5e4e2"],
+    [populationGroup[1].name, populationGroup[1].ratio, currPopulationGroup?.name === populationGroup[1].name ? "" : "#e5e4e2"],
+    [populationGroup[2].name, populationGroup[2].ratio, currPopulationGroup?.name === populationGroup[2].name ? "" : "#e5e4e2"],
+    [populationGroup[3].name, populationGroup[3].ratio, currPopulationGroup?.name === populationGroup[3].name ? "" : "#e5e4e2"],
+    [populationGroup[4].name, populationGroup[4].ratio, currPopulationGroup?.name === populationGroup[4].name ? "" : "#e5e4e2"],
+  ];
 
   return (
     <div className="w-[50%] py-5 px-5 flex flex-col justify-between">
@@ -62,9 +121,20 @@ function Content() {
           ))}
         </div>
         {pageNo === pagesData.length - 1 && (
-          <div>
-            <p>test1</p>
-            <p>test2</p>
+          <div className="flex flex-col gap-3 item-center">
+            <p className="text-sm font-light">
+              You earn a <span className="font-bold">total income of {incomeAnnual.toLocaleString()} bath per year</span>, with an{" "}
+              <span className="font-bold">annual profit of {cashFlowAnnual.toLocaleString()} bath</span> remaining at the end of each year.
+            </p>
+            <div>
+              <Chart chartType="ColumnChart" width="100%" height="100%" data={populationChart} />
+            </div>
+            <p className="text-xs">
+              <b>
+                {currPopulationGroup?.name} {currPopulationGroup?.ratio}%:
+              </b>
+              {currPopulationGroup?.text}
+            </p>
           </div>
         )}
       </div>
