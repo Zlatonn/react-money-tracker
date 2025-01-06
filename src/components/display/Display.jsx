@@ -5,30 +5,34 @@ function Display() {
   // import useFinance from statemanagement
   const income = useFinance((state) => state.income);
   const expense = useFinance((state) => state.expense);
-
   const getIncomeMonthly = useFinance((state) => state.getIncomeMonthly);
   const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
   const getExpenseMonthly = useFinance((state) => state.getExpenseMonthly);
   const getExpenseAnnual = useFinance((state) => state.getExpenseAnnual);
+  const getCashFlowMonthly = useFinance((state) => state.getCashFlowMonthly);
+  const getCashFlowAnnual = useFinance((state) => state.getCashFlowAnnual);
 
   //create local state
   const [incomMonthly, setIncomeMonthly] = useState(0);
   const [incomeAnnual, setIncomeAnnual] = useState(0);
   const [expenseMonthly, setExpenseMonthly] = useState(0);
   const [expenseAnnual, setExpenseAnnual] = useState(0);
+  const [cashFlowMonthly, setCashFlowMonthly] = useState(0);
+  const [cashFlowAnnual, setCashFlowAnnual] = useState(0);
 
   useEffect(() => {
     setIncomeMonthly(getIncomeMonthly);
     setIncomeAnnual(getIncomeAnnual);
-  }, [income, getIncomeMonthly, getIncomeAnnual]);
+    setCashFlowMonthly(getCashFlowMonthly);
+    setCashFlowAnnual(getCashFlowAnnual);
+  }, [income, getIncomeMonthly, getIncomeAnnual, getCashFlowMonthly, getCashFlowAnnual]);
 
   useEffect(() => {
     setExpenseMonthly(getExpenseMonthly);
     setExpenseAnnual(getExpenseAnnual);
-  }, [expense, getExpenseMonthly, getExpenseAnnual]);
-
-  const cashFlowMonthly = incomMonthly - expenseMonthly;
-  const cashFlowAnnual = incomeAnnual - expenseAnnual;
+    setCashFlowMonthly(getCashFlowMonthly);
+    setCashFlowAnnual(getCashFlowAnnual);
+  }, [expense, getExpenseMonthly, getExpenseAnnual, getCashFlowMonthly, getCashFlowAnnual]);
 
   // function return sign number
   const signStatus = (number) => {

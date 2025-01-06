@@ -19,7 +19,7 @@ const useFinance = create(
           expense: { ...state.expense, [id]: { value, per } },
         })),
 
-      // calculate store
+      // function calculate store
       getIncomeMonthly: () =>
         Object.values(get().income)
           .filter((item) => item.per === "month")
@@ -45,6 +45,10 @@ const useFinance = create(
           .map((item) => item.value || 0)
           .reduce((acc, curr) => acc + curr, 0) +
         get().getExpenseMonthly() * 12,
+
+      getCashFlowMonthly: () => get().getIncomeMonthly() - get().getExpenseMonthly(),
+
+      getCashFlowAnnual: () => get().getIncomeAnnual() - get().getExpenseAnnual(),
     }),
     {
       name: "finance-storage",
