@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import Step from "./Step";
-import data from "../../data";
-
 import usePageNo from "../../hooks/usePageNo";
+import Step from "./Step";
+import pagesData from "../../pagesData";
 
 function SideBar() {
-  const currPageNo = usePageNo((state) => state.pageNo);
-  const setPage = usePageNo((state) => state.setPage);
+  // import usepageNo from state management
+  const pageNo = usePageNo((state) => state.pageNo);
+  const setPageNo = usePageNo((state) => state.setPageNo);
 
+  // create state for current page data
   const [pageData, setPageData] = useState({});
 
+  // update current page data when pageNo change
   useEffect(() => {
-    const currPageData = data.find((page) => page.pageNo === currPageNo);
-    setPageData(currPageData || {});
-  }, [currPageNo]);
+    const currentPageData = pagesData.find((page) => page.pageNo === pageNo);
+    setPageData(currentPageData || {});
+  }, [pageNo]);
 
   return (
     <div className="w-[30%] min-h-full pt-5 pb-20 px-5 bg-[#304767] text-white flex flex-col gap-10">
@@ -23,14 +25,14 @@ function SideBar() {
         <p className="text-sm opacity-80">{pageData.suggestText}</p>
       </div>
       <div className="flex flex-col gap-16">
-        {data.map((e) => (
+        {pagesData.map((e) => (
           <Step
             key={e.pageNo}
             pageNo={e.pageNo}
             name={e.pageName}
             line={e.line}
-            state={e.pageNo === currPageNo ? "active" : e.pageNo < currPageNo ? "complete" : null}
-            handle={() => setPage(e.pageNo)}
+            state={e.pageNo === pageNo ? "active" : e.pageNo < pageNo ? "complete" : null}
+            handle={() => setPageNo(e.pageNo)}
           />
         ))}
       </div>
