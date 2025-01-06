@@ -37,7 +37,7 @@ function Display() {
 
   return (
     <div className="w-[20%] py-20 px-5 flex flex-col gap-5 text-sm">
-      <div className="p-3 rounded-lg bg-blue-100">
+      <div className="p-3 rounded-md bg-gray-100">
         <p className="font-bold text-lg ">Mothly</p>
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center">
@@ -60,7 +60,7 @@ function Display() {
         </div>
       </div>
 
-      <div className="p-3  rounded-lg bg-blue-100">
+      <div className="p-3 rounded-md bg-gray-100">
         <p className="font-bold text-lg">Annual</p>
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center">
