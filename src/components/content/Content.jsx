@@ -105,7 +105,7 @@ function Content() {
         <div className="w-full grid grid-cols-2 gap-x-5 gap-y-10">
           {pageData?.details?.map((detail) => (
             <div key={detail.id} className="text-sm flex flex-col gap-1">
-              <p>
+              <p className="whitespace-nowrap text-ellipsis overflow-hidden sm:whitespace-normal sm:text-wrap sm:overflow-visible">
                 {detail.name}
                 <span className="text-blue-500">{` / ${detail.per}`}</span>
               </p>
