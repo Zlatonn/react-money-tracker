@@ -101,8 +101,10 @@ function Content() {
       <div className="flex flex-col gap-6">
         <p>😊</p>
         <p className="text-xl font-bold">{pageData.pageName}</p>
-        <p className="text-sm font-light opacity-50">{pageData.suggestText}</p>
-        <div className="w-full grid grid-cols-2 gap-x-5 gap-y-10">
+        <p className="text-sm font-light opacity-50 whitespace-nowrap text-ellipsis overflow-hidden sm:whitespace-normal sm:text-wrap sm:overflow-visible">
+          {pageData.suggestText}
+        </p>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2 sm:gap-y-10">
           {pageData?.details?.map((detail) => (
             <div key={detail.id} className="text-sm flex flex-col gap-1">
               <p className="whitespace-nowrap text-ellipsis overflow-hidden sm:whitespace-normal sm:text-wrap sm:overflow-visible">
@@ -127,10 +129,10 @@ function Content() {
               You earn a <span className="font-bold">total income of {incomeAnnual.toLocaleString()} bath per year</span>, with an{" "}
               <span className="font-bold">annual profit of {cashFlowAnnual.toLocaleString()} bath</span> remaining at the end of each year.
             </p>
-            <div>
+            <div className="hidden sm:block">
               <Chart chartType="ColumnChart" width="100%" height="100%" data={populationChart} />
             </div>
-            <p className="text-xs">
+            <p className="text-xs hidden sm:block">
               <b>
                 {currPopulationGroup?.name} {currPopulationGroup?.ratio}%:
               </b>
@@ -143,7 +145,7 @@ function Content() {
       <div className="flex justify-start gap-2 sm:gap-5 items-center mt-10">
         <Button name="Prev" handle={pageNo > 0 ? prevPage : null} />
         <Button name="Next" handle={pageNo < pagesData.length - 1 ? nextPage : null} />
-        <Button name="clear" handle={clearData} />
+        <Button name="Clear" handle={clearData} />
       </div>
     </div>
   );
