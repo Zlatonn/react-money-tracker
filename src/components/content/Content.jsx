@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import pagesData from "../../pagesData";
 import usePageNo from "../../hooks/usePageNo";
 import Button from "../button/Button";
-import Input from "../input/input";
+import Input from "../input/Input";
 import useFinance from "../../hooks/useFinance";
 import Chart from "react-google-charts";
 
