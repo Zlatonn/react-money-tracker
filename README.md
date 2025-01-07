@@ -4,8 +4,6 @@
 
 React Money Tracker is a financial management application designed to help users track their income and expenses. The app summarizes financial data and categorizes users into different income sections, providing a clear understanding of their financial standing.
 
----
-
 ## 🚀 Features
 
 - **Step-by-step process**: Navigate through income, expense, and summary sections easily.
@@ -14,16 +12,12 @@ React Money Tracker is a financial management application designed to help users
 - **Responsive summary**: View a breakdown of annual income and expenses with a categorized chart.
 - **Comparison**: See how your financial status compares to others in your group.
 
----
-
 ## 🛠️ Technologies Used
 
 - **React**
 - **Tailwind CSS** for modern, responsive design.
 - **JavaScript** for dynamic interaction and calculations.
 - **Charts.js** (or similar) for data visualization (if applicable).
-
----
 
 ## 📦 Installation
 
@@ -46,8 +40,6 @@ To run the project locally:
    npm start
    ```
 
----
-
 ## 🎮 Usage
 
 1. Income Section
@@ -65,30 +57,27 @@ To run the project locally:
 - View a detailed breakdown of your income and expenses.
 - See your position in the financial distribution chart (e.g., bottom 20%, middle 50%).
 
----
-
 ## 📸 Screenshots
 
 - Income Page
+  
   ![Income Section](./src/assets/screenshots/income.png)
+  
 - Expense Page
+  
   ![Expense Section](./src/assets/screenshots/expense.png)
+  
 - Summary Page
+  
   ![Summary Section](./src/assets/screenshots/summary.png)
-
----
 
 ## 🧑‍💻 Contributors
 
 Zlatonn
 
----
-
 ## 📜 License
 
 This project is licensed under the MIT License.
-
----
 
 ## 🌟 Acknowledgements
 
