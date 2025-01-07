@@ -5,7 +5,7 @@ import Display from "./components/display/Display";
 function App() {
   return (
     <div className="m-0 p-0 box-border min-h-[100vh] w-[100vw] bg-gray-200 flex justify-center items-center">
-      <div className="w-[60%] bg-white rounded-xl flex justify-between overflow-hidden">
+      <div className="w-[90%] lg:w-[80%] xl:w-[70%] 2xl:w-[60%] bg-white rounded-xl flex justify-between overflow-hidden">
         <SideBar />
         <Content />
         <Display />

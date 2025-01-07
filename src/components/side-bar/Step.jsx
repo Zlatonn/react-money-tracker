@@ -3,7 +3,7 @@ function Step({ pageNo, name, line, state, handle }) {
   return (
     <div className="relative flex items-center gap-3 cursor-pointer " onClick={handle}>
       <div
-        className={`w-7 h-7 border-2 rounded-full flex justify-center items-center text-sm ${
+        className={`w-6 sm:w-7 h-6 sm:h-7 border-2 rounded-full flex justify-center items-center text-sm ${
           state === "active"
             ? `bg-[#304767] text-white border-white`
             : state === "complete"
@@ -13,10 +13,10 @@ function Step({ pageNo, name, line, state, handle }) {
       >
         {pageNo + 1}
       </div>
-      <span className={`${state ? `opacity-none` : `opacity-10`}`}>{name}</span>
+      <span className={`${state ? `opacity-none` : `opacity-10`} text-sm sm:text-md`}>{name}</span>
       {line ? (
         <div
-          className={`absolute left-[13px] top-7 h-16 border-l-2 border-white cursor-default ${
+          className={`absolute left-[11px] sm:left-[13px] top-6 sm:top-7 h-16 border-l-2 border-white cursor-default ${
             state === "complete" ? `opacity-none` : `opacity-10`
           }`}
         ></div>

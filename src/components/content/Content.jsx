@@ -97,7 +97,7 @@ function Content() {
   ];
 
   return (
-    <div className="w-[50%] py-5 px-5 flex flex-col justify-between">
+    <div className="w-[57%] sm:w-[70%] lg:w-[47%] xl:w-[50%] py-5 px-5 flex flex-col justify-between">
       <div className="flex flex-col gap-6">
         <p>😊</p>
         <p className="text-xl font-bold">{pageData.pageName}</p>
@@ -140,7 +140,7 @@ function Content() {
         )}
       </div>
 
-      <div className="flex justify-start gap-5 items-center mt-10">
+      <div className="flex justify-start gap-2 sm:gap-5 items-center mt-10">
         <Button name="Prev" handle={pageNo > 0 ? prevPage : null} />
         <Button name="Next" handle={pageNo < pagesData.length - 1 ? nextPage : null} />
         <Button name="clear" handle={clearData} />
