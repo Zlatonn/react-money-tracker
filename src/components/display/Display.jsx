@@ -1,38 +1,17 @@
-import { useEffect, useState } from "react";
 import useFinance from "../../hooks/useFinance";
 
 function Display() {
   // import useFinance from state management
-  const income = useFinance((state) => state.income);
-  const expense = useFinance((state) => state.expense);
-  const getIncomeMonthly = useFinance((state) => state.getIncomeMonthly);
-  const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
-  const getExpenseMonthly = useFinance((state) => state.getExpenseMonthly);
-  const getExpenseAnnual = useFinance((state) => state.getExpenseAnnual);
-  const getCashFlowMonthly = useFinance((state) => state.getCashFlowMonthly);
-  const getCashFlowAnnual = useFinance((state) => state.getCashFlowAnnual);
+  // use object destructure
+  const { getIncomeMonthly, getIncomeAnnual, getExpenseMonthly, getExpenseAnnual, getCashFlowMonthly, getCashFlowAnnual } = useFinance();
 
-  //create local state
-  const [incomMonthly, setIncomeMonthly] = useState(0);
-  const [incomeAnnual, setIncomeAnnual] = useState(0);
-  const [expenseMonthly, setExpenseMonthly] = useState(0);
-  const [expenseAnnual, setExpenseAnnual] = useState(0);
-  const [cashFlowMonthly, setCashFlowMonthly] = useState(0);
-  const [cashFlowAnnual, setCashFlowAnnual] = useState(0);
-
-  useEffect(() => {
-    setIncomeMonthly(getIncomeMonthly);
-    setIncomeAnnual(getIncomeAnnual);
-    setCashFlowMonthly(getCashFlowMonthly);
-    setCashFlowAnnual(getCashFlowAnnual);
-  }, [income, getIncomeMonthly, getIncomeAnnual, getCashFlowMonthly, getCashFlowAnnual]);
-
-  useEffect(() => {
-    setExpenseMonthly(getExpenseMonthly);
-    setExpenseAnnual(getExpenseAnnual);
-    setCashFlowMonthly(getCashFlowMonthly);
-    setCashFlowAnnual(getCashFlowAnnual);
-  }, [expense, getExpenseMonthly, getExpenseAnnual, getCashFlowMonthly, getCashFlowAnnual]);
+  // update finace value
+  const incomMonthly = getIncomeMonthly();
+  const incomeAnnual = getIncomeAnnual();
+  const expenseMonthly = getExpenseMonthly();
+  const expenseAnnual = getExpenseAnnual();
+  const cashFlowMonthly = getCashFlowMonthly();
+  const cashFlowAnnual = getCashFlowAnnual();
 
   // function return sign number
   const signStatus = (number) => {

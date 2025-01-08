@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import usePageNo from "../../hooks/usePageNo";
 import Step from "./Step";
 import pagesData from "../../pagesData";
@@ -8,13 +8,9 @@ function SideBar() {
   const pageNo = usePageNo((state) => state.pageNo);
   const setPageNo = usePageNo((state) => state.setPageNo);
 
-  // create state for current page data
-  const [pageData, setPageData] = useState({});
-
   // update current page data when pageNo change
-  useEffect(() => {
-    const currentPageData = pagesData.find((page) => page.pageNo === pageNo);
-    setPageData(currentPageData || {});
+  const pageData = useMemo(() => {
+    return pagesData.find((page) => page.pageNo === pageNo) || {};
   }, [pageNo]);
 
   return (

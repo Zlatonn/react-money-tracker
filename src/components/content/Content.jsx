@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useMemo } from "react";
 import pagesData from "../../pagesData";
 import usePageNo from "../../hooks/usePageNo";
 import Button from "../button/Button";
@@ -12,57 +12,50 @@ function Content() {
   const prevPage = usePageNo((state) => state.prevPage);
   const nextPage = usePageNo((state) => state.nextPage);
 
-  // create local state for current page data
-  const [pageData, setPageData] = useState({});
-
   // update current page data when pageNo change
-  useEffect(() => {
-    const currentPage = pagesData.find((page) => page.pageNo === pageNo);
-    setPageData(currentPage || {});
+  // useMemo to memorize result of function
+  const pageData = useMemo(() => {
+    return pagesData.find((page) => page.pageNo === pageNo) || {};
   }, [pageNo]);
 
   // import useFinance from statemanagement
-  const income = useFinance((state) => state.income);
-  const updateIncome = useFinance((state) => state.updateIncome);
-  const expense = useFinance((state) => state.expense);
-  const updateExpense = useFinance((state) => state.updateExpense);
-  const clearData = useFinance((state) => state.clearData);
-  const getIncomeAnnual = useFinance((state) => state.getIncomeAnnual);
-  const getCashFlowAnnual = useFinance((state) => state.getCashFlowAnnual);
+  // use object destructure
+  const { income, expense, updateIncome, updateExpense, clearData, getIncomeAnnual, getCashFlowAnnual } = useFinance();
 
   // function handle input
-  const handleIncomeInput = (id, value, per) => {
-    updateIncome(id, value, per);
-  };
+  // useCallback to memorize the function and avoid creating a new instance on every re-render
+  const handleIncomeInput = useCallback(
+    (id, value, per) => {
+      updateIncome(id, value, per);
+    },
+    [updateIncome]
+  );
 
-  const handleExpenseInput = (id, value, per) => {
-    updateExpense(id, value, per);
-  };
+  const handleExpenseInput = useCallback(
+    (id, value, per) => {
+      updateExpense(id, value, per);
+    },
+    [updateExpense]
+  );
 
-  //create local state for summary page
-  const [incomeAnnual, setIncomeAnnual] = useState(0);
-  const [cashFlowAnnual, setCashFlowAnnual] = useState(0);
-
-  //update income & cash flow per annual
-  useEffect(() => {
-    setIncomeAnnual(getIncomeAnnual);
-  }, [income, getIncomeAnnual]);
-
-  useEffect(() => {
-    setCashFlowAnnual(getCashFlowAnnual);
-  }, [income, expense, getCashFlowAnnual]);
+  // //update income & cash flow per annual
+  const incomeAnnual = getIncomeAnnual();
+  const cashFlowAnnual = getCashFlowAnnual();
 
   //population group data
-  const populationGroup = [
-    { name: "Bottom", ratio: 20, text: "This group of the population has an average annual income of less than 100,000 bath" },
-    { name: "Second", ratio: 20, text: "This group of the population has an average annual income of 100,000 - 200,000 baht." },
-    { name: "Middle", ratio: 20, text: "This group of the population has an average annual income of 200,000 - 400,000 baht." },
-    { name: "Fourth", ratio: 20, text: "This group of the population has an average annual income of 400,000 - 800,000 baht." },
-    { name: "Top", ratio: 20, text: "This group of the population has an average annual income of more than 800,000 baht." },
-  ];
+  const populationGroup = useMemo(
+    () => [
+      { name: "Bottom", ratio: 20, text: "This group of the population has an average annual income of less than 100,000 bath" },
+      { name: "Second", ratio: 20, text: "This group of the population has an average annual income of 100,000 - 200,000 baht." },
+      { name: "Middle", ratio: 20, text: "This group of the population has an average annual income of 200,000 - 400,000 baht." },
+      { name: "Fourth", ratio: 20, text: "This group of the population has an average annual income of 400,000 - 800,000 baht." },
+      { name: "Top", ratio: 20, text: "This group of the population has an average annual income of more than 800,000 baht." },
+    ],
+    []
+  );
 
   //function find current group
-  const findPopulationGroup = () => {
+  const findPopulationGroup = (incomeAnnual) => {
     if (incomeAnnual <= 100000) {
       return "Bottom";
     } else if (incomeAnnual > 100000 && incomeAnnual <= 200000) {
@@ -76,15 +69,10 @@ function Content() {
     }
   };
 
-  //create local state for current group
-  const [currPopulationGroup, setCurrPopulationGroup] = useState({});
-
   // update curr group
-  useEffect(() => {
-    const matchedGroup = populationGroup.find((group) => group.name === findPopulationGroup());
-    setCurrPopulationGroup(matchedGroup);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomeAnnual]);
+  const currPopulationGroup = useMemo(() => {
+    return populationGroup.find((group) => group.name === findPopulationGroup(incomeAnnual));
+  }, [populationGroup, incomeAnnual]);
 
   // data fot  create google chart colunm type
   const populationChart = [
