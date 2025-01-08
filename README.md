@@ -19,6 +19,11 @@ React Money Tracker is a financial management application designed to help users
 - **JavaScript** for dynamic interaction and calculations.
 - **Charts.js** (or similar) for data visualization (if applicable).
 
+## 🌐 Live Demo
+
+- Explore the live version of the React Money Tracker application here:
+  👉 https://zlatonn-react-money-tracker.netlify.app/
+
 ## 📦 Installation
 
 To run the project locally:
@@ -60,15 +65,15 @@ To run the project locally:
 ## 📸 Screenshots
 
 - Income Page
-  
+
   ![Income Section](./src/assets/screenshots/income.png)
-  
+
 - Expense Page
-  
+
   ![Expense Section](./src/assets/screenshots/expense.png)
-  
+
 - Summary Page
-  
+
   ![Summary Section](./src/assets/screenshots/summary.png)
 
 ## 🧑‍💻 Contributors
