@@ -21,8 +21,8 @@ React Money Tracker is a financial management application designed to help users
 
 ## 🌐 Live Demo
 
-- Explore the live version of the React Money Tracker application here:
-  👉 https://zlatonn-react-money-tracker.netlify.app/
+Explore the live version of the React Money Tracker application here:
+👉 https://zlatonn-react-money-tracker.netlify.app/
 
 ## 📦 Installation
 
