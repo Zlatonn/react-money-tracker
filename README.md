@@ -15,6 +15,7 @@ React Money Tracker is a financial management application designed to help users
 ## 🛠️ Technologies Used
 
 - **React**
+- **Zustand** for efficient state management.
 - **Tailwind CSS** for modern, responsive design.
 - **JavaScript** for dynamic interaction and calculations.
 - **Charts.js** (or similar) for data visualization (if applicable).
